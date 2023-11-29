@@ -1,3 +1,4 @@
+import { useState } from "react";
 import componentsImg from "./assets/components.png";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
@@ -17,6 +18,11 @@ import { CORE_CONCEPTS } from "./data";
 //OR
 
 function App() {
+  const [selectedTopic, setSelectedTopic] = useState("Please click a button!");
+
+  function handelSelect(selectedButton) {
+    setSelectedTopic(selectedButton);
+  }
   return (
     <div>
       <Header />
@@ -37,11 +43,14 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton>Components</TabButton>
-            <TabButton>JSX</TabButton>
-            <TabButton>Props</TabButton>
-            <TabButton>State</TabButton>
+            <TabButton onSelect={() => handelSelect("components")}>
+              Components
+            </TabButton>
+            <TabButton onSelect={() => handelSelect("jsx")}>JSX</TabButton>
+            <TabButton onSelect={() => handelSelect("props")}>Props</TabButton>
+            <TabButton onSelect={() => handelSelect("state")}>State</TabButton>
           </menu>
+          {selectedTopic}
         </section>
       </main>
     </div>
